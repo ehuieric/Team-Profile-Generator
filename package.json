@@ -1,8 +1,8 @@
 {
-  "name": "unit10hw",
+  "name": "team-profile-generator",
   "version": "1.0.0",
-  "description": "OOP and testing for week 10 homework",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/stevetrilogy/unit10hw.git"
   },
-  "author": "",
+  "author": "Eric Ehui",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stevetrilogy/unit10hw/issues"
