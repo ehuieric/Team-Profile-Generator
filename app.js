@@ -13,19 +13,45 @@ const render = require("./lib/htmlRenderer");
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-inquirer
-  .prompt([
-    /* Pass your questions in here */
-
-    {
+function manager() {
+    inquirer
+    .prompt([
+      /* Pass your questions in here */
+      {
+          type: 'input',
+          name: 'title',
+          message: 'What is your name?',
+          default: false,
+      },
+      {
         type: 'input',
         name: 'title',
-        message: 'What is your name?',
+        message: 'What is your id?',
         default: false,
     },
-  ]).then(answers => {
 
-});
+
+     {
+      type: 'input',
+      name: 'title',
+      message: 'What is your email?',
+      default: false,
+    },
+
+
+    {
+      type: 'input',
+      name: 'title',
+      message: 'What is your office phone number?',
+      default: false,
+    },
+    ]).then(answers => {
+
+  });
+  
+
+}
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
