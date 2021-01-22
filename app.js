@@ -41,7 +41,8 @@ function addIntern() {
     default: false,
   },
   ]).then(answers => {
-    employees.push(JSON.stringify(answers));
+    const intern = new Intern (answers.name , answers.id , answers.email , answers.school);
+    employees.push(intern);
      addTeamMember();
   });
 }
@@ -79,7 +80,8 @@ function addEngineer() {
     default: false,
   },
   ]).then(answers => {
-    employees.push(JSON.stringify(answers));
+    const engineer = new Engineer (answers.name , answers.id , answers.email , answers.github);
+    employees.push(engineer);
     addTeamMember();
   });
 }
@@ -116,7 +118,7 @@ function addTeamMember() {
     if (answers.newMember) {
       addEmployee();
     } else {
-      console.log(`employees`, employees);
+      generateHtml();
     }
   });
 
@@ -155,9 +157,17 @@ function initiate() {
     default: false,
   },
   ]).then(answers => {
-    employees.push(JSON.stringify(answers));
+    const manager = new Manager (answers.name , answers.id , answers.email , answers.officeNumber);
+    employees.push(manager);
     addTeamMember();
   });
+}
+
+function generateHtml() {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  fs.writeFileSync(outputPath, render(employees), "utf-8");
 }
 
 initiate();
