@@ -10,47 +10,157 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const inquirer = require('inquirer');
-const fs = require('fs');
+const employees = [];
 
-function manager() {
-    inquirer
-    .prompt([
-      /* Pass your questions in here */
-      {
-          type: 'input',
-          name: 'title',
-          message: 'What is your name?',
-          default: false,
-      },
-      {
+function addIntern() {
+  inquirer
+  .prompt([
+    /* Pass your questions in here */
+    {
         type: 'input',
-        name: 'title',
-        message: 'What is your id?',
+        name: 'name',
+        message: "What is the employee's name?",
         default: false,
     },
-
-
-     {
-      type: 'input',
-      name: 'title',
-      message: 'What is your email?',
-      default: false,
-    },
-
-
     {
       type: 'input',
-      name: 'title',
-      message: 'What is your office phone number?',
+      name: 'id',
+      message: "What is the employee's id?",
       default: false,
-    },
-    ]).then(answers => {
-
+  },
+   {
+    type: 'input',
+    name: 'email',
+    message: "What is the employee's email?",
+    default: false,
+  },
+  {
+    type: 'input',
+    name: 'school',
+    message: 'What school did the employee attend?',
+    default: false,
+  },
+  ]).then(answers => {
+    employees.push(JSON.stringify(answers));
+     addTeamMember();
   });
-  
+}
+
+function addEngineer() {
+  inquirer
+  .prompt([
+    /* Pass your questions in here */
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the employee's name?",
+        default: false,
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: "What is the employee's id?",
+      default: false,
+  },
+
+
+   {
+    type: 'input',
+    name: 'email',
+    message: "What is the employee's email?",
+    default: false,
+  },
+
+
+  {
+    type: 'input',
+    name: 'github',
+    message: "What is the employee's github?",
+    default: false,
+  },
+  ]).then(answers => {
+    employees.push(JSON.stringify(answers));
+    addTeamMember();
+  });
+}
+
+function addEmployee() {
+  inquirer
+  .prompt([
+    {
+      type: 'rawlist',
+      name: 'employeeType',
+      message: 'What type of employee',
+      choices: ['engineer', 'intern'],
+    },
+  ]).then(answers => {
+    if (answers.employeeType === 'engineer') {
+      addEngineer();
+    } else {
+      addIntern();
+    }
+  });
+}
+
+
+function addTeamMember() {
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+        name: 'newMember',
+        message: 'Would you like to add a team member?',
+        default: false,
+    },
+  ]).then(answers => {
+    if (answers.newMember) {
+      addEmployee();
+    } else {
+      console.log(`employees`, employees);
+    }
+  });
 
 }
+
+function initiate() {
+  inquirer
+  .prompt([
+    /* Pass your questions in here */
+    {
+        type: 'input',
+        name: 'name',
+        message: 'What is your name?',
+        default: false,
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is your id?',
+      default: false,
+  },
+
+
+   {
+    type: 'input',
+    name: 'email',
+    message: 'What is your email?',
+    default: false,
+  },
+
+
+  {
+    type: 'input',
+    name: 'officeNumber',
+    message: 'What is your office phone number?',
+    default: false,
+  },
+  ]).then(answers => {
+    employees.push(JSON.stringify(answers));
+    addTeamMember();
+  });
+}
+
+initiate();
 
 
 // Write code to use inquirer to gather information about the development team members,
